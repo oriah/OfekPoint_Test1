@@ -1,0 +1,7 @@
+D:\WorkDrive\TFS\Amiram\Sisma\Sisma.Project1.Web\obj\Debug\netcoreapp3.1\Sisma.Project1.Web.csproj.AssemblyReference.cache
+D:\WorkDrive\TFS\Amiram\Sisma\Sisma.Project1.Web\obj\Debug\netcoreapp3.1\Sisma.Project1.Web.GeneratedMSBuildEditorConfig.editorconfig
+D:\WorkDrive\TFS\Amiram\Sisma\Sisma.Project1.Web\obj\Debug\netcoreapp3.1\Sisma.Project1.Web.AssemblyInfoInputs.cache
+D:\WorkDrive\TFS\Amiram\Sisma\Sisma.Project1.Web\obj\Debug\netcoreapp3.1\Sisma.Project1.Web.AssemblyInfo.cs
+D:\WorkDrive\TFS\Amiram\Sisma\Sisma.Project1.Web\obj\Debug\netcoreapp3.1\Sisma.Project1.Web.csproj.CoreCompileInputs.cache
+D:\WorkDrive\TFS\Amiram\Sisma\Sisma.Project1.Web\obj\Debug\netcoreapp3.1\Sisma.Project1.Web.MvcApplicationPartsAssemblyInfo.cs
+D:\WorkDrive\TFS\Amiram\Sisma\Sisma.Project1.Web\obj\Debug\netcoreapp3.1\Sisma.Project1.Web.MvcApplicationPartsAssemblyInfo.cache

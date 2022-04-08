@@ -33,3 +33,6 @@ in swagger: **Site** section.
 /api/admin  -  admin site actions  
 in swagger: **AdminSchools, AdminClasseses, AdminStudents, AdminStudentInClasses** sections.
   
+
+
+** For clearance:  I Wrote every piece of code of the system (NO COPY-PASTE)

@@ -35,4 +35,4 @@ in swagger: **AdminSchools, AdminClasseses, AdminStudents, AdminStudentInClasses
   
 
 
-** For clearance:  I Wrote every piece of code of the system (NO COPY-PASTE)
+** To be clear:  I Wrote every piece of code of the system (NO COPY-PASTE)

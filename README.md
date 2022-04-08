@@ -13,7 +13,7 @@ AutoMapper,
 Log4Net  
 
 
-3-Tier Architecture :  
+Architecture (3-tier) :  
 Sisma.Web (Presentation-Layer)  
 Sisma.BL  (Business-Logic-Layer)  
 Sisma.DAL  (Data-Access-Layer)  

@@ -2,7 +2,7 @@
 
 Live URL (Azure App Service) :  
 ------
-http://oria1.azurewebsites.net/  
+https://oria2.azurewebsites.net/swagger/index.html
   
   
   

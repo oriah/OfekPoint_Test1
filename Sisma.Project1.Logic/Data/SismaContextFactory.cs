@@ -8,7 +8,7 @@ namespace Sisma.Project1.Logic.Data
         public SismaContext CreateDbContext(string[] args)
         {
             var optionsBuilder = new DbContextOptionsBuilder<SismaContext>();
-            optionsBuilder.UseSqlServer(@"Data Source=tcp:oria.database.windows.net,1433;initial catalog=SismaDB;Integrated Security=True; MultipleActiveResultSets=True");
+            optionsBuilder.UseSqlServer(@"Server=tcp:oria.database.windows.net,1433;Initial Catalog=SismaDB;Persist Security Info=False;User ID=sa1;Password=ids8eWE234;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
             //optionsBuilder.UseSqlServer(@"Data Source=(localdb)\MSSQLLocalDB;initial catalog=SismaDB;Integrated Security=True; MultipleActiveResultSets=True");
             return new SismaContext(optionsBuilder.Options);
         } 

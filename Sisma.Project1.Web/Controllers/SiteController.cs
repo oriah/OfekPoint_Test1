@@ -1,7 +1,8 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using Sisma.Project1.Logic.Business;
-using Sisma.Project1.Logic.Data;
+using Sisma.Project1.BL.Business;
+using Sisma.Project1.DAL.Data;
+using Sisma.Project1.Shared.Exceptions;
 using Sisma.Project1.Web.Helpers;
 using Sisma.Project1.Web.Models;
 
@@ -30,56 +31,138 @@ namespace Sisma.Project1.Web.Controllers
 
 
 
-
+        /// <summary>
+        /// Returns all schools in the current system.
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         [Route("getAllSchools")]
         public IActionResult GetAllSchools()
         {
-            var res = _blAdmin.Schools.GetAll();
-            return Ok(res.Select(item => item.Map<SchoolDTO>(_mapper)));
+            try
+            {
+                var res = _blAdmin.Schools.GetAll();
+                return Ok(res.Select(item => item.Map<SchoolDTO>(_mapper)));
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);   //Todo LOG for the current layer (=PL)
+                throw;
+            }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="schoolId">school id (=referential unique ID)</param>
+        /// <param name="forceDelete"></param>
+        /// <returns></returns>
         [HttpDelete]
         [Route("deleteSchool")]
-        public IActionResult DeleteSchool(Guid schoolId, bool forceDelete) // – if forceDelete is false – only delete school which has no users/classrooms attached. if forceDelete is true – do whatever it takes to delete the school.
+        public IActionResult DeleteSchool(Guid schoolId, bool forceDelete)   // – if forceDelete is false – only delete school which has no users/classrooms attached. if forceDelete is true – do whatever it takes to delete the school.
         {
-            _bl.DeleteSchool(schoolId, forceDelete);
+            try
+            {
+                bool deleteAvoided;
+                _bl.DeleteSchool(schoolId, forceDelete);
 
-            return Ok();
+                return Ok();
+            }
+            catch (SismaException sexc) when (sexc.Type == SismaExceptionTypes.ObjectDependencyExists)
+            {
+                return BadRequest("The school has associated classes and/or students while 'forceDelete' was specified as 'false'");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);   //Todo LOG for the current layer (=PL)
+                throw;
+            }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="classId">class id (=referential unique ID)</param>
+        /// <returns></returns>
         [HttpGet]
         [Route("getClassStudentsByClassId")]
         public IActionResult GetClassStudentsByClassId(Guid classId) // – list of all active students of a class
         {
-            List<Student> res = _bl.GetClassStudentsByClassId(classId);
-            return Ok(res.Select(item => item.Map<StudentDTO>(_mapper)));
+            try
+            {
+                List<Student> res = _bl.GetClassStudentsByClassId(classId);
+                return Ok(res.Select(item => item.Map<StudentDTO>(_mapper)));
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);   //Todo LOG for the current layer (=PL)
+                throw;
+            }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="studentId">class id (=referential unique ID)</param>
+        /// <returns></returns>
         [HttpGet]
         [Route("getAllStudentClasses")]
         public IActionResult GetAllStudentClasses(Guid studentId) // – all active classes that the user has.
         {
-            List<Class> res = _bl.GetAllStudentClasses(studentId);
-            return Ok(res.Select(item => item.Map<ClassDTO>(_mapper)));
+            try
+            {
+                List<Class> res = _bl.GetAllStudentClasses(studentId);
+                return Ok(res.Select(item => item.Map<ClassDTO>(_mapper)));
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);   //Todo LOG for the current layer (=PL)
+                throw;
+            }
         }
 
         [HttpPost]
         [Route("createStudent")]
         public IActionResult CreateStudent(StudentDTO item) //    -create a student with no classes, but of course he has school
         {
-            _blAdmin.Students.Create(item.Map<Student>(_mapper));
+            try
+            {
+                _blAdmin.Students.Create(item.Map<Student>(_mapper));
 
-            return Ok();
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);   //Todo LOG for the current layer (=PL)
+                throw;
+            }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="studentId">student id (=referential unique ID)</param>
+        /// <param name="classId">class id (=referential unique ID)</param>
+        /// <returns></returns>
         [HttpPut]
         [Route("addStudentToClass")]
         public IActionResult AddStudentToClass(Guid studentId, Guid classId)
         {
-            _bl.AddStudentToClass(studentId, classId);
+            try
+            {
+                _bl.AddStudentToClass(studentId, classId);
 
-            return Ok();
+                return Ok();
+            }
+            catch (SismaException sexc) when (sexc.Type == SismaExceptionTypes.StudentSchoolMismatch)
+            {
+                return BadRequest("The school has associated classes and/or students while 'forceDelete' was specified as 'false'");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);   //Todo LOG for the current layer (=PL)
+                throw;
+            }
         }
 
 
@@ -88,9 +171,17 @@ namespace Sisma.Project1.Web.Controllers
         [Route("deleteAllEmptyClasses")]
         public IActionResult DeleteAllEmptyClasses()
         {
-            _bl.DeleteAllEmptyClasses();
+            try
+            {
+                _bl.DeleteAllEmptyClasses();
 
-            return Ok();
+                return Ok();
+            }
+              catch (Exception e)
+            {
+                Console.WriteLine(e);   //Todo LOG for the current layer (=PL)
+                throw;
+            }
         }
 
 

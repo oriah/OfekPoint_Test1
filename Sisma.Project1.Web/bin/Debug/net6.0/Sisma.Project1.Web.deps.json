@@ -11,7 +11,9 @@
           "AutoMapper": "11.0.1",
           "AutoMapper.Extensions.Microsoft.DependencyInjection": "11.0.0",
           "Microsoft.Extensions.Logging.Log4Net.AspNetCore": "6.1.0",
-          "Sisma.Project1.Logic": "1.0.0",
+          "Sisma.Project1.BL": "1.0.0",
+          "Sisma.Project1.DAL": "1.0.0",
+          "Sisma.Project1.Shared": "1.0.0",
           "Swashbuckle.AspNetCore": "6.2.3",
           "log4net": "2.0.14"
         },
@@ -518,7 +520,21 @@
           }
         }
       },
-      "Sisma.Project1.Logic/1.0.0": {
+      "Sisma.Project1.BL/1.0.0": {
+        "dependencies": {
+          "AutoMapper": "11.0.1",
+          "AutoMapper.Extensions.Microsoft.DependencyInjection": "11.0.0",
+          "Microsoft.EntityFrameworkCore.SqlServer": "6.0.3",
+          "Microsoft.Extensions.Logging.Log4Net.AspNetCore": "6.1.0",
+          "Sisma.Project1.DAL": "1.0.0",
+          "Sisma.Project1.Shared": "1.0.0",
+          "log4net": "2.0.14"
+        },
+        "runtime": {
+          "Sisma.Project1.BL.dll": {}
+        }
+      },
+      "Sisma.Project1.DAL/1.0.0": {
         "dependencies": {
           "AutoMapper": "11.0.1",
           "AutoMapper.Extensions.Microsoft.DependencyInjection": "11.0.0",
@@ -527,7 +543,16 @@
           "log4net": "2.0.14"
         },
         "runtime": {
-          "Sisma.Project1.Logic.dll": {}
+          "Sisma.Project1.DAL.dll": {}
+        }
+      },
+      "Sisma.Project1.Shared/1.0.0": {
+        "dependencies": {
+          "Microsoft.Extensions.Logging.Log4Net.AspNetCore": "6.1.0",
+          "log4net": "2.0.14"
+        },
+        "runtime": {
+          "Sisma.Project1.Shared.dll": {}
         }
       }
     }
@@ -902,7 +927,17 @@
       "path": "system.windows.extensions/4.7.0",
       "hashPath": "system.windows.extensions.4.7.0.nupkg.sha512"
     },
-    "Sisma.Project1.Logic/1.0.0": {
+    "Sisma.Project1.BL/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Sisma.Project1.DAL/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Sisma.Project1.Shared/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

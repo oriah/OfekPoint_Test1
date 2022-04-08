@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using Sisma.Project1.Logic.Business;
-using Sisma.Project1.Logic.Data;
+using Sisma.Project1.BL.Business;
+using Sisma.Project1.DAL.Data;
 using Sisma.Project1.Web.Helpers;
 
 var builder = WebApplication.CreateBuilder(args);

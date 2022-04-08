@@ -1,0 +1,12 @@
+D:\WorkDrive\TFS\Amiram\Sisma\Source\Sisma.Project1.Shared\bin\Debug\net6.0\Sisma.Project1.Shared.deps.json
+D:\WorkDrive\TFS\Amiram\Sisma\Source\Sisma.Project1.Shared\bin\Debug\net6.0\Sisma.Project1.Shared.dll
+D:\WorkDrive\TFS\Amiram\Sisma\Source\Sisma.Project1.Shared\bin\Debug\net6.0\Sisma.Project1.Shared.pdb
+D:\WorkDrive\TFS\Amiram\Sisma\Source\Sisma.Project1.Shared\obj\Debug\net6.0\Sisma.Project1.Shared.csproj.AssemblyReference.cache
+D:\WorkDrive\TFS\Amiram\Sisma\Source\Sisma.Project1.Shared\obj\Debug\net6.0\Sisma.Project1.Shared.GeneratedMSBuildEditorConfig.editorconfig
+D:\WorkDrive\TFS\Amiram\Sisma\Source\Sisma.Project1.Shared\obj\Debug\net6.0\Sisma.Project1.Shared.AssemblyInfoInputs.cache
+D:\WorkDrive\TFS\Amiram\Sisma\Source\Sisma.Project1.Shared\obj\Debug\net6.0\Sisma.Project1.Shared.AssemblyInfo.cs
+D:\WorkDrive\TFS\Amiram\Sisma\Source\Sisma.Project1.Shared\obj\Debug\net6.0\Sisma.Project1.Shared.csproj.CoreCompileInputs.cache
+D:\WorkDrive\TFS\Amiram\Sisma\Source\Sisma.Project1.Shared\obj\Debug\net6.0\Sisma.Project1.Shared.dll
+D:\WorkDrive\TFS\Amiram\Sisma\Source\Sisma.Project1.Shared\obj\Debug\net6.0\refint\Sisma.Project1.Shared.dll
+D:\WorkDrive\TFS\Amiram\Sisma\Source\Sisma.Project1.Shared\obj\Debug\net6.0\Sisma.Project1.Shared.pdb
+D:\WorkDrive\TFS\Amiram\Sisma\Source\Sisma.Project1.Shared\obj\Debug\net6.0\ref\Sisma.Project1.Shared.dll

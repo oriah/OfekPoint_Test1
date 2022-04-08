@@ -17,7 +17,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Sisma.Project1.Logic\Sisma.Project1.Logic.csproj" />
+    <ProjectReference Include="..\Sisma.Project1.BL\Sisma.Project1.BL.csproj" />
+    <ProjectReference Include="..\Sisma.Project1.DAL\Sisma.Project1.DAL.csproj" />
+    <ProjectReference Include="..\Sisma.Project1.Shared\Sisma.Project1.Shared.csproj" />
   </ItemGroup>
 
   <ItemGroup>

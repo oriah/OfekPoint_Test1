@@ -46,5 +46,9 @@ D:\WorkDrive\TFS\Amiram\Sisma\Source\Sisma.Project1.Web\obj\Debug\net6.0\PubTmp\
 D:\WorkDrive\TFS\Amiram\Sisma\Source\Sisma.Project1.Web\obj\Debug\net6.0\PubTmp\Out\runtimes\win\lib\netstandard2.0\System.Runtime.Caching.dll
 D:\WorkDrive\TFS\Amiram\Sisma\Source\Sisma.Project1.Web\obj\Debug\net6.0\PubTmp\Out\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
 D:\WorkDrive\TFS\Amiram\Sisma\Source\Sisma.Project1.Web\obj\Debug\net6.0\PubTmp\Out\runtimes\win\lib\netcoreapp3.0\System.Windows.Extensions.dll
-D:\WorkDrive\TFS\Amiram\Sisma\Source\Sisma.Project1.Web\obj\Debug\net6.0\PubTmp\Out\Sisma.Project1.Logic.dll
-D:\WorkDrive\TFS\Amiram\Sisma\Source\Sisma.Project1.Web\obj\Debug\net6.0\PubTmp\Out\Sisma.Project1.Logic.pdb
+D:\WorkDrive\TFS\Amiram\Sisma\Source\Sisma.Project1.Web\obj\Debug\net6.0\PubTmp\Out\Sisma.Project1.BL.dll
+D:\WorkDrive\TFS\Amiram\Sisma\Source\Sisma.Project1.Web\obj\Debug\net6.0\PubTmp\Out\Sisma.Project1.DAL.dll
+D:\WorkDrive\TFS\Amiram\Sisma\Source\Sisma.Project1.Web\obj\Debug\net6.0\PubTmp\Out\Sisma.Project1.Shared.dll
+D:\WorkDrive\TFS\Amiram\Sisma\Source\Sisma.Project1.Web\obj\Debug\net6.0\PubTmp\Out\Sisma.Project1.BL.pdb
+D:\WorkDrive\TFS\Amiram\Sisma\Source\Sisma.Project1.Web\obj\Debug\net6.0\PubTmp\Out\Sisma.Project1.DAL.pdb
+D:\WorkDrive\TFS\Amiram\Sisma\Source\Sisma.Project1.Web\obj\Debug\net6.0\PubTmp\Out\Sisma.Project1.Shared.pdb

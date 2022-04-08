@@ -1,7 +1,7 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using Sisma.Project1.Logic.Business;
-using Sisma.Project1.Logic.Data;
+using Sisma.Project1.BL.Business;
+using Sisma.Project1.DAL.Data;
 using Sisma.Project1.Web.Helpers;
 using Sisma.Project1.Web.Models;
 

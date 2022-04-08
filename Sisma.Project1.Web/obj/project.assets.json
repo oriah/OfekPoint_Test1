@@ -744,7 +744,26 @@
           }
         }
       },
-      "Sisma.Project1.Logic/1.0.0": {
+      "Sisma.Project1.BL/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "AutoMapper": "11.0.1",
+          "AutoMapper.Extensions.Microsoft.DependencyInjection": "11.0.0",
+          "Microsoft.EntityFrameworkCore.SqlServer": "6.0.3",
+          "Microsoft.Extensions.Logging.Log4Net.AspNetCore": "6.1.0",
+          "Sisma.Project1.DAL": "1.0.0",
+          "Sisma.Project1.Shared": "1.0.0",
+          "log4net": "2.0.14"
+        },
+        "compile": {
+          "bin/placeholder/Sisma.Project1.BL.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Sisma.Project1.BL.dll": {}
+        }
+      },
+      "Sisma.Project1.DAL/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
@@ -755,10 +774,24 @@
           "log4net": "2.0.14"
         },
         "compile": {
-          "bin/placeholder/Sisma.Project1.Logic.dll": {}
+          "bin/placeholder/Sisma.Project1.DAL.dll": {}
         },
         "runtime": {
-          "bin/placeholder/Sisma.Project1.Logic.dll": {}
+          "bin/placeholder/Sisma.Project1.DAL.dll": {}
+        }
+      },
+      "Sisma.Project1.Shared/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "Microsoft.Extensions.Logging.Log4Net.AspNetCore": "6.1.0",
+          "log4net": "2.0.14"
+        },
+        "compile": {
+          "bin/placeholder/Sisma.Project1.Shared.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Sisma.Project1.Shared.dll": {}
         }
       }
     }
@@ -2163,10 +2196,20 @@
         "version.txt"
       ]
     },
-    "Sisma.Project1.Logic/1.0.0": {
+    "Sisma.Project1.BL/1.0.0": {
       "type": "project",
-      "path": "../Sisma.Project1.Logic/Sisma.Project1.Logic.csproj",
-      "msbuildProject": "../Sisma.Project1.Logic/Sisma.Project1.Logic.csproj"
+      "path": "../Sisma.Project1.BL/Sisma.Project1.BL.csproj",
+      "msbuildProject": "../Sisma.Project1.BL/Sisma.Project1.BL.csproj"
+    },
+    "Sisma.Project1.DAL/1.0.0": {
+      "type": "project",
+      "path": "../Sisma.Project1.DAL/Sisma.Project1.DAL.csproj",
+      "msbuildProject": "../Sisma.Project1.DAL/Sisma.Project1.DAL.csproj"
+    },
+    "Sisma.Project1.Shared/1.0.0": {
+      "type": "project",
+      "path": "../Sisma.Project1.Shared/Sisma.Project1.Shared.csproj",
+      "msbuildProject": "../Sisma.Project1.Shared/Sisma.Project1.Shared.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -2174,7 +2217,9 @@
       "AutoMapper >= 11.0.1",
       "AutoMapper.Extensions.Microsoft.DependencyInjection >= 11.0.0",
       "Microsoft.Extensions.Logging.Log4Net.AspNetCore >= 6.1.0",
-      "Sisma.Project1.Logic >= 1.0.0",
+      "Sisma.Project1.BL >= 1.0.0",
+      "Sisma.Project1.DAL >= 1.0.0",
+      "Sisma.Project1.Shared >= 1.0.0",
       "Swashbuckle.AspNetCore >= 6.2.3",
       "log4net >= 2.0.14"
     ]
@@ -2216,8 +2261,14 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "D:\\WorkDrive\\TFS\\Amiram\\Sisma\\Source\\Sisma.Project1.Logic\\Sisma.Project1.Logic.csproj": {
-              "projectPath": "D:\\WorkDrive\\TFS\\Amiram\\Sisma\\Source\\Sisma.Project1.Logic\\Sisma.Project1.Logic.csproj"
+            "D:\\WorkDrive\\TFS\\Amiram\\Sisma\\Source\\Sisma.Project1.BL\\Sisma.Project1.BL.csproj": {
+              "projectPath": "D:\\WorkDrive\\TFS\\Amiram\\Sisma\\Source\\Sisma.Project1.BL\\Sisma.Project1.BL.csproj"
+            },
+            "D:\\WorkDrive\\TFS\\Amiram\\Sisma\\Source\\Sisma.Project1.DAL\\Sisma.Project1.DAL.csproj": {
+              "projectPath": "D:\\WorkDrive\\TFS\\Amiram\\Sisma\\Source\\Sisma.Project1.DAL\\Sisma.Project1.DAL.csproj"
+            },
+            "D:\\WorkDrive\\TFS\\Amiram\\Sisma\\Source\\Sisma.Project1.Shared\\Sisma.Project1.Shared.csproj": {
+              "projectPath": "D:\\WorkDrive\\TFS\\Amiram\\Sisma\\Source\\Sisma.Project1.Shared\\Sisma.Project1.Shared.csproj"
             }
           }
         }

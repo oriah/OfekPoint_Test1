@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Sisma.Project1.Logic.Data;
+using Sisma.Project1.DAL.Data;
 using Sisma.Project1.Web.Models;
 
 namespace Sisma.Project1.Web.Helpers

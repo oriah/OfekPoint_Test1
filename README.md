@@ -3,8 +3,9 @@
 ### **Live URL (Azure App Service) :**  
 https://oria2.azurewebsites.net/swagger/index.html
   
+** Azure SQL Database is used under the hood.  
   
-
+  
 ### **Elements, technologies and/or paradigms used in this tester :**  
 ASP.NET 6.0,  
  MSSQL,   

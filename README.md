@@ -1,7 +1,6 @@
 # OfekPoint_Test1
 
 Live URL (Azure App Service) :  
-
 http://oria1.azurewebsites.net/  
 
 Elements, technologies and/or paradigms used in this tester :  
@@ -11,9 +10,9 @@ Dependendancy Injection (ASP.CORE Out-of-the-box), AutoMapper
 
 3-Tier Architecture
 
-Sisma.Web (Presentation-Layer)  
-Sisma.BL  (Business-Logic-Layer)  
-Sisma.DAL  (Data-Access-Layer)  
-[Sisma.Shared  (a cross-cutting shared layer)]    
+Sisma.Web (Presentation-Layer)
+Sisma.BL  (Business-Logic-Layer)
+Sisma.DAL  (Data-Access-Layer)
+[Sisma.Shared  (a cross-cutting shared layer)]  
 --------------     
 MSSQL DB  (Code-First Design]  

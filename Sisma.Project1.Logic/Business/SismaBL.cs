@@ -31,6 +31,7 @@ namespace Sisma.Project1.Logic.Business
                 this.Schools = new Repository<School>();
                 this.Classes = new Repository<Class>();
                 this.Students = new Repository<Student>();
+                this.StudentInClasses = new Repository<StudentInClass>();
             }
 
 

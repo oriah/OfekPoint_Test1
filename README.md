@@ -9,10 +9,9 @@ ASP.NET 6.0, MSSQL, Entity Framework Core (Code-First-Design),
 Dependendancy Injection (ASP.CORE Out-of-the-box), AutoMapper  
 
 3-Tier Architecture
-
-Sisma.Web (Presentation-Layer)
-Sisma.BL  (Business-Logic-Layer)
-Sisma.DAL  (Data-Access-Layer)
-[Sisma.Shared  (a cross-cutting shared layer)]  
+Sisma.Web (Presentation-Layer)  
+Sisma.BL  (Business-Logic-Layer)  
+Sisma.DAL  (Data-Access-Layer)  
+[Sisma.Shared  (a cross-cutting shared layer)]    
 --------------     
 MSSQL DB  (Code-First Design]  

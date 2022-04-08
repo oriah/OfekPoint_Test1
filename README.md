@@ -28,8 +28,8 @@ DB:  MSSQL DB  (Code-First Design]
 ### **API Structure**  
 
 /api  -  normal site  
-in swagger: Site section.
+in swagger: **Site** section.
 
 /api/admin  -  admin site  
-in swagger: AdminSchools,AdminClasseses,AdminStudents sections.
+in swagger: **AdminSchools,AdminClasseses,AdminStudents** sections.
   

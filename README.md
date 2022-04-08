@@ -27,9 +27,9 @@ DB:  MSSQL DB  (Code-First Design]
 
 ### **API Structure**  
 
-/api  -  normal site  
+/api  -  normal site actions  
 in swagger: **Site** section.
 
-/api/admin  -  admin site  
+/api/admin  -  admin site actions  
 in swagger: **AdminSchools,AdminClasseses,AdminStudents** sections.
   

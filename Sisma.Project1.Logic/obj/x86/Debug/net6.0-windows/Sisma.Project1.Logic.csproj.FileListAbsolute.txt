@@ -1,0 +1,14 @@
+D:\WorkDrive\TFS\Amiram\Sisma\Source\Sisma.Project1.Logic\bin\x86\Debug\net6.0-windows\Sisma.Project1.Logic.deps.json
+D:\WorkDrive\TFS\Amiram\Sisma\Source\Sisma.Project1.Logic\bin\x86\Debug\net6.0-windows\Sisma.Project1.Logic.runtimeconfig.json
+D:\WorkDrive\TFS\Amiram\Sisma\Source\Sisma.Project1.Logic\bin\x86\Debug\net6.0-windows\Sisma.Project1.Logic.dll
+D:\WorkDrive\TFS\Amiram\Sisma\Source\Sisma.Project1.Logic\bin\x86\Debug\net6.0-windows\Sisma.Project1.Logic.pdb
+D:\WorkDrive\TFS\Amiram\Sisma\Source\Sisma.Project1.Logic\obj\x86\Debug\net6.0-windows\Sisma.Project1.Logic.csproj.AssemblyReference.cache
+D:\WorkDrive\TFS\Amiram\Sisma\Source\Sisma.Project1.Logic\obj\x86\Debug\net6.0-windows\Sisma.Project1.Logic.GeneratedMSBuildEditorConfig.editorconfig
+D:\WorkDrive\TFS\Amiram\Sisma\Source\Sisma.Project1.Logic\obj\x86\Debug\net6.0-windows\Sisma.Project1.Logic.AssemblyInfoInputs.cache
+D:\WorkDrive\TFS\Amiram\Sisma\Source\Sisma.Project1.Logic\obj\x86\Debug\net6.0-windows\Sisma.Project1.Logic.AssemblyInfo.cs
+D:\WorkDrive\TFS\Amiram\Sisma\Source\Sisma.Project1.Logic\obj\x86\Debug\net6.0-windows\Sisma.Project1.Logic.csproj.CoreCompileInputs.cache
+D:\WorkDrive\TFS\Amiram\Sisma\Source\Sisma.Project1.Logic\obj\x86\Debug\net6.0-windows\Sisma.Project1.Logic.dll
+D:\WorkDrive\TFS\Amiram\Sisma\Source\Sisma.Project1.Logic\obj\x86\Debug\net6.0-windows\refint\Sisma.Project1.Logic.dll
+D:\WorkDrive\TFS\Amiram\Sisma\Source\Sisma.Project1.Logic\obj\x86\Debug\net6.0-windows\Sisma.Project1.Logic.pdb
+D:\WorkDrive\TFS\Amiram\Sisma\Source\Sisma.Project1.Logic\obj\x86\Debug\net6.0-windows\Sisma.Project1.Logic.genruntimeconfig.cache
+D:\WorkDrive\TFS\Amiram\Sisma\Source\Sisma.Project1.Logic\obj\x86\Debug\net6.0-windows\ref\Sisma.Project1.Logic.dll

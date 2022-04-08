@@ -19,8 +19,8 @@ namespace Sisma.Project1.BL.Business
         public class CRUD : IDisposable
         {
 
-            public Repository<School> Schools { get; set; } // = new Repository<Location>();
-            public Repository<Class> Classes { get; set; } // = new Repository<Artist>();
+            public SchoolRepository Schools { get; set; } // = new Repository<Location>();
+            public ClassRepository Classes { get; set; } // = new Repository<Artist>();
             public Repository<Student> Students { get; set; } // = new Repository<User>();
             public Repository<StudentInClass> StudentInClasses { get; set; } // = new Repository<User>();
 
@@ -28,8 +28,8 @@ namespace Sisma.Project1.BL.Business
 
             public CRUD()
             {
-                this.Schools = new Repository<School>();
-                this.Classes = new Repository<Class>();
+                this.Schools = new SchoolRepository();
+                this.Classes = new ClassRepository();
                 this.Students = new Repository<Student>();
                 this.StudentInClasses = new Repository<StudentInClass>();
             }
@@ -285,6 +285,76 @@ namespace Sisma.Project1.BL.Business
         int SaveChanges();
     }
 
+
+    public class SchoolRepository : Repository<School>
+    {
+        protected override School GetInternal(Guid id)
+        {
+            return _db.Schools
+                        .Include(item => item.Classes)
+                        .Include(item => item.Students)
+                .FirstOrDefault(item => item.RefId == id);
+        }
+
+        public override void Delete(Guid id, bool saveChanges = true)
+        {
+            var dbClass = GetInternal(id);
+            if (dbClass.Classes.Count != 0 || dbClass.Students.Count != 0)
+            {
+                throw new SismaException(SismaExceptionTypes.ObjectDependencyExists);
+            }
+            base.Delete(id, saveChanges);
+        }
+    }
+
+    public class ClassRepository : Repository<Class>
+    {
+        protected override Class GetInternal(Guid id)
+        {
+            return _db.Classes
+                .Include(item => item.StudentInClasses)
+                .FirstOrDefault(item => item.RefId == id);
+        }
+
+        public override void Delete(Guid id, bool saveChanges = true)
+        {
+            var dbClass = GetInternal(id);
+            if (dbClass.StudentInClasses.Count != 0)
+            {
+                throw new SismaException(SismaExceptionTypes.ObjectDependencyExists);
+            }
+            base.Delete(id, saveChanges);
+        }
+    }
+
+    public class StudentRepository : Repository<Student>
+    {
+        protected override Student GetInternal(Guid id)
+        {
+            return _db.Students
+                .Include(item => item.StudentInClasses)
+                .FirstOrDefault(item => item.RefId == id);
+        }
+
+        public override void Delete(Guid id, bool saveChanges = true)
+        {
+            var dbClass = GetInternal(id);
+            if (dbClass.StudentInClasses.Count != 0)
+            {
+                throw new SismaException(SismaExceptionTypes.ObjectDependencyExists);
+            }
+            base.Delete(id, saveChanges);
+        }
+    }
+
+    //public class StudentInClassRepository : Repository<School>
+    //{
+    //    public override void Delete(Guid id, bool saveChanges = true)
+    //    {
+    //        base.Delete(id, saveChanges);
+    //    }
+    //}
+
     public class Repository<T> : IRepository<T>
         where T : class, IDBEntity
     {
@@ -296,22 +366,22 @@ namespace Sisma.Project1.BL.Business
         }
 
 
-        public List<T> GetAll()
+        public virtual List<T> GetAll()
         {
             return _db.Set<T>().Select(a => a).ToList();
         }
 
-        public T Get(Guid id)
+        public virtual T Get(Guid id)
         {
             return GetInternal(id);
         }
 
-        private T GetInternal(Guid id)
+        protected virtual T GetInternal(Guid id)
         {
             return _db.Set<T>().FirstOrDefault(item => item.RefId == id);
         }
 
-        public void Create(T entity, bool saveChanges = true)
+        public virtual void Create(T entity, bool saveChanges = true)
         {
             _db.Set<T>().Add(entity);
             if (saveChanges)
@@ -320,7 +390,7 @@ namespace Sisma.Project1.BL.Business
             }
         }
 
-        public void Update(T entity, bool saveChanges = true)
+        public virtual void Update(T entity, bool saveChanges = true)
         {
             _db.Entry<T>(entity).State = EntityState.Modified;
             if (saveChanges)
@@ -329,7 +399,7 @@ namespace Sisma.Project1.BL.Business
             }
         }
 
-        public void Delete(Guid id, bool saveChanges = true)
+        public virtual void Delete(Guid id, bool saveChanges = true)
         {
             var q = Get(id);
             _db.Set<T>().Remove(q);
@@ -339,19 +409,19 @@ namespace Sisma.Project1.BL.Business
             }
         }
 
-        public bool Exists(Guid id)
+        public virtual bool Exists(Guid id)
         {
             var res = GetInternal(id);
             return res != null;
         }
 
-        public int SaveChanges()
+        public virtual int SaveChanges()
         {
             return _db.SaveChanges();
         }
 
 
-        public void Dispose()
+        public virtual void Dispose()
         {
             _db.Dispose();
             _db = null;

@@ -2,6 +2,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Sisma.Project1.BL.Business;
 using Sisma.Project1.DAL.Data;
+using Sisma.Project1.Shared.Exceptions;
 using Sisma.Project1.Web.Helpers;
 using Sisma.Project1.Web.Models;
 
@@ -60,9 +61,22 @@ namespace Sisma.Project1.Web.Controllers
         [HttpDelete]
         public IActionResult Delete(Guid studentId)
         {
-            _blAdmin.Students.Delete(studentId);
+            try
+            {
+                _blAdmin.Students.Delete(studentId);
 
-            return Ok();
+                return Ok();
+
+            }
+            catch (SismaException sexc) when (sexc.Type == SismaExceptionTypes.ObjectDependencyExists)
+            {
+                return BadRequest("The student has associated class-related records");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                throw;
+            }
         }
 
 

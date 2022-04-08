@@ -61,14 +61,14 @@ namespace Sisma.Project1.Web.Controllers
         public IActionResult GetAllStudentClasses(Guid studentId) // – all active classes that the user has.
         {
             List<Class> res = _bl.GetAllStudentClasses(studentId);
-            return Ok(res.Select(item=>item.Map<ClassDTO>(_mapper)));
+            return Ok(res.Select(item => item.Map<ClassDTO>(_mapper)));
         }
 
         [HttpPost]
         [Route("createStudent")]
-        public IActionResult CreateStudent(Student item) //    -create a student with no classes, but of course he has school
+        public IActionResult CreateStudent(StudentDTO item) //    -create a student with no classes, but of course he has school
         {
-            _blAdmin.Students.Create(item);
+            _blAdmin.Students.Create(item.Map<Student>(_mapper));
 
             return Ok();
         }

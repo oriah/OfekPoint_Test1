@@ -5,13 +5,14 @@ https://oria2.azurewebsites.net/swagger/index.html
    
   
 ### **Elements, technologies and/or paradigms used in this tester :**  
-ASP.NET 6.0,  
- MSSQL,   
-Entity Framework Core (Code-First-Design),    
-Dependendancy Injection (ASP.CORE Out-of-the-box),   
-AutoMapper,   
-Log4Net  
-
+ASP.NET 6.0  
+MSSQL   
+Entity Framework Core (Code-First-Design)    
+Dependendancy Injection (ASP.CORE Out-of-the-box) -  cross cutting   
+AutoMapper  
+Multi-Layer Exception Typing and Handling (cross-cutting)  
+Log4Net  (cross-cutting)   
+DataAnnotations   
   
   
   

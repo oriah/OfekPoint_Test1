@@ -18,6 +18,6 @@ Architecture (3-tier) :
 Sisma.Web (Presentation-Layer)  
 Sisma.BL  (Business-Logic-Layer)  
 Sisma.DAL  (Data-Access-Layer)  
-[Sisma.Shared  (a cross-cutting shared layer)]    
---------------     
+[Sisma.Shared  (a cross-cutting shared layer)]   
+->
 MSSQL DB  (Code-First Design]  

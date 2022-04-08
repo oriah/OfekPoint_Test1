@@ -6,8 +6,7 @@ https://oria2.azurewebsites.net/swagger/index.html
   
   
   
-Elements, technologies and/or paradigms used in this tester :  
-------
+**Elements, technologies and/or paradigms used in this tester :**  
 ASP.NET 6.0,  
  MSSQL,   
 Entity Framework Core (Code-First-Design),    
@@ -18,8 +17,7 @@ Log4Net
   
   
   
-Architecture (3-tier) :  
-------
+**Architecture (3-tier) :**  
 Sisma.Web (Presentation-Layer)  
 Sisma.BL  (Business-Logic-Layer)  
 Sisma.DAL  (Data-Access-Layer)  

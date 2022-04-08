@@ -1,56 +1,66 @@
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Sisma.Project1.Logic.Business;
 using Sisma.Project1.Logic.Data;
-using Sisma.Project1.Logic.Models;
+using Sisma.Project1.Web.Helpers;
+using Sisma.Project1.Web.Models;
 
 namespace Sisma.Project1.Web.Controllers
 {
-    [Route("api/admin/[controller]")]
+    [Route("api/admin/students")]
     [ApiController]
-    public class StudentsController : ControllerBase
+    public class AdminStudentsController : ControllerBase
     {
 
-        public StudentsController()
-        {
+        private IMapper _mapper;
+        private readonly IConfiguration _config;
+        private readonly SismaBL.CRUD _blAdmin;
+        private readonly ILogger _logger;
 
+        public AdminStudentsController(IMapper mapper, IConfiguration config, SismaBL.CRUD sismaBLCRUD, ILogger<AdminStudentsController> logger)
+        {
+            this._mapper = mapper;
+            _config = config;
+            _blAdmin = sismaBLCRUD;
+            _logger = logger;
         }
 
 
 
         //Student (L)CRUD
 
+        [HttpGet("getAll")]
         public IActionResult GetAll()
         {
-            var x = new GeneralBL.CRUD();
-            var x0 = x.Students.GetAll();
+            var x0 = _blAdmin.Students.GetAll();
 
-            return Ok(x0);
+            return Ok(x0.Select(item => item.Map<StudentDTO>(_mapper)));
         }
-        public IActionResult Get(Guid classId)
+        [HttpGet("get")]
+        public IActionResult Get(Guid studentId)
         {
-            var x = new GeneralBL.CRUD();
-            var x0 = x.Students.Get(classId);
+            var x0 = _blAdmin.Students.Get(studentId);
 
-            return Ok(x0);
+            return Ok(x0.Map<StudentDTO>(_mapper));
         }
-        public IActionResult Create(Student item)
+        [HttpPost]
+        public IActionResult Create(StudentDTO item)
         {
-            var x = new GeneralBL.CRUD();
-            x.Students.Create(item);
-
-            return Ok();
-        }
-        public IActionResult Update(Student item)
-        {
-            var x = new GeneralBL.CRUD();
-            x.Students.Update(item);
+            _blAdmin.Students.Create(item.Map<Student>(_mapper));
 
             return Ok();
         }
-        public IActionResult Delete(Guid classId)
+        [HttpPut]
+        public IActionResult Update(StudentDTO item)
         {
-            var x = new GeneralBL.CRUD();
-            x.Students.Delete(classId);
+            _blAdmin.Students.Update(item.Map<Student>(_mapper));
+
+            return Ok();
+        }
+        [HttpDelete]
+        public IActionResult Delete(Guid studentId)
+        {
+            _blAdmin.Students.Delete(studentId);
 
             return Ok();
         }

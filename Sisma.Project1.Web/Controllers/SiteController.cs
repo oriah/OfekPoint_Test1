@@ -1,7 +1,9 @@
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Sisma.Project1.Logic.Business;
 using Sisma.Project1.Logic.Data;
-using Sisma.Project1.Logic.Models;
+using Sisma.Project1.Web.Helpers;
+using Sisma.Project1.Web.Models;
 
 namespace Sisma.Project1.Web.Controllers
 {
@@ -10,10 +12,21 @@ namespace Sisma.Project1.Web.Controllers
     public class SiteController : ControllerBase
     {
 
-        public SiteController()
-        {
+        private IMapper _mapper;
+        private readonly IConfiguration _config;
+        private readonly SismaBL _bl;
+        private readonly SismaBL.CRUD _blAdmin;
+        private readonly ILogger _logger;
 
+        public SiteController(IMapper mapper, IConfiguration config, SismaBL sismaBL, SismaBL.CRUD sismaBLCRUD, ILogger<SiteController> logger)
+        {
+            this._mapper = mapper;
+            _config = config;
+            _bl = sismaBL;
+            _blAdmin = sismaBLCRUD;
+            _logger = logger;
         }
+
 
 
 
@@ -22,16 +35,15 @@ namespace Sisma.Project1.Web.Controllers
         [Route("getAllSchools")]
         public IActionResult GetAllSchools()
         {
-            var x = new GeneralBL.CRUD();
-            return Ok(x.Schools.GetAll());
+            var x = _blAdmin.Schools.GetAll();
+            return Ok(x.Map<SchoolDTO>(_mapper));
         }
-      
+
         [HttpDelete]
         [Route("deleteSchool")]
         public IActionResult DeleteSchool(Guid schoolId, bool forceDelete) // – if forceDelete is false – only delete school which has no users/classrooms attached. if forceDelete is true – do whatever it takes to delete the school.
         {
-            var x = new GeneralBL();
-            x.DeleteSchool(schoolId, forceDelete);
+            _bl.DeleteSchool(schoolId, forceDelete);
 
             return Ok();
         }
@@ -40,24 +52,23 @@ namespace Sisma.Project1.Web.Controllers
         [Route("getClassStudentsByClassId")]
         public IActionResult GetClassStudentsByClassId(Guid classId) // – list of all active students of a class
         {
-            var x = new GeneralBL();
-            return Ok(x.GetClassStudentsByClassId(classId));
+            List<Student> x = _bl.GetClassStudentsByClassId(classId);
+            return Ok(x.Map<StudentDTO>(_mapper));
         }
-    
+
         [HttpGet]
         [Route("getAllStudentClasses")]
         public IActionResult GetAllStudentClasses(Guid studentId) // – all active classes that the user has.
         {
-            var x = new GeneralBL();
-            return Ok(x.GetAllStudentClasses(studentId));
+            List<Class> x = _bl.GetAllStudentClasses(studentId);
+            return Ok(x.Map<ClassDTO>(_mapper));
         }
 
         [HttpPost]
         [Route("createStudent")]
         public IActionResult CreateStudent(Student item) //    -create a student with no classes, but of course he has school
         {
-            var x = new GeneralBL.CRUD();
-            x.Students.Create(item);
+            _blAdmin.Students.Create(item);
 
             return Ok();
         }
@@ -66,8 +77,7 @@ namespace Sisma.Project1.Web.Controllers
         [Route("addStudentToClass")]
         public IActionResult AddStudentToClass(Guid studentId, Guid classId)
         {
-            var x = new GeneralBL();
-            x.AddStudentToClass(studentId, classId);
+            _bl.AddStudentToClass(studentId, classId);
 
             return Ok();
         }
@@ -78,14 +88,10 @@ namespace Sisma.Project1.Web.Controllers
         [Route("deleteAllEmptyClasses")]
         public IActionResult DeleteAllEmptyClasses()
         {
-            var x = new GeneralBL();
-            x.DeleteAllEmptyClasses();
+            _bl.DeleteAllEmptyClasses();
 
             return Ok();
         }
-
-
-
 
 
 

@@ -24,14 +24,11 @@ namespace Sisma.Project1.Logic.Migrations
 
             modelBuilder.Entity("Sisma.Project1.Logic.Data.Class", b =>
                 {
-                    b.Property<int>("ClassId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ClassId"), 1L, 1);
-
-                    b.Property<Guid>("ClassRefId")
-                        .HasColumnType("uniqueidentifier");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
@@ -43,10 +40,13 @@ namespace Sisma.Project1.Logic.Migrations
                     b.Property<DateTime>("RecordCreateDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<Guid>("RefId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<int>("SchoolId")
                         .HasColumnType("int");
 
-                    b.HasKey("ClassId");
+                    b.HasKey("Id");
 
                     b.HasIndex("SchoolId");
 
@@ -55,11 +55,11 @@ namespace Sisma.Project1.Logic.Migrations
 
             modelBuilder.Entity("Sisma.Project1.Logic.Data.School", b =>
                 {
-                    b.Property<int>("SchoolId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SchoolId"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("Address")
                         .IsRequired()
@@ -75,21 +75,21 @@ namespace Sisma.Project1.Logic.Migrations
                     b.Property<DateTime>("RecordCreateDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid>("SchoolRefId")
+                    b.Property<Guid>("RefId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("SchoolId");
+                    b.HasKey("Id");
 
                     b.ToTable("Schools");
                 });
 
             modelBuilder.Entity("Sisma.Project1.Logic.Data.Student", b =>
                 {
-                    b.Property<int>("StudentId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("StudentId"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
@@ -101,13 +101,13 @@ namespace Sisma.Project1.Logic.Migrations
                     b.Property<DateTime>("RecordCreateDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<Guid>("RefId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<int>("SchoolId")
                         .HasColumnType("int");
 
-                    b.Property<Guid>("StudentRefId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("StudentId");
+                    b.HasKey("Id");
 
                     b.HasIndex("SchoolId");
 

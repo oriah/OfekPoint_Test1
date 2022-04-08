@@ -1,14 +1,17 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+using Sisma.Project1.Logic.Business;
 
 namespace Sisma.Project1.Logic.Data
 {
-    public class School
+    public class School : IDBEntity
     {
+
         [Key]
-        public int SchoolId { get; set; }
-        public Guid SchoolRefId { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int Id { get; set; }
+        public Guid RefId { get; set; }
         public string Name { get; set; }
         public string Address { get; set; }
         public DateTime RecordCreateDate { get; set; }
@@ -19,13 +22,15 @@ namespace Sisma.Project1.Logic.Data
         public virtual ICollection<Class> Classes { get; set; }
         public virtual ICollection<Student> Students { get; set; }
 
+
     }
 
-    public class Class
+    public class Class : IDBEntity
     {
         [Key]
-        public int ClassId { get; set; }
-        public Guid ClassRefId { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int Id { get; set; }
+        public Guid RefId { get; set; }
         public int SchoolId { get; set; }
         public string Name { get; set; }
         public DateTime RecordCreateDate { get; set; }
@@ -35,13 +40,15 @@ namespace Sisma.Project1.Logic.Data
         public virtual School School { get; set; }
         public virtual ICollection<StudentInClass> StudentInClasses { get; set; }
 
+
     }
 
-    public class Student
+    public class Student : IDBEntity
     {
         [Key]
-        public int StudentId { get; set; }
-        public Guid StudentRefId { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int Id { get; set; }
+        public Guid RefId { get; set; }
         public int SchoolId { get; set; }
         public string Name { get; set; }
         public DateTime RecordCreateDate { get; set; }
@@ -51,6 +58,8 @@ namespace Sisma.Project1.Logic.Data
         //navigation
         public virtual School School { get; set; }
         public virtual ICollection<StudentInClass> StudentInClasses { get; set; }
+
+
 
     }
 

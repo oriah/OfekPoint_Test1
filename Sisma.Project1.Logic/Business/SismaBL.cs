@@ -22,6 +22,7 @@ namespace Sisma.Project1.Logic.Business
             public Repository<School> Schools { get; set; } // = new Repository<Location>();
             public Repository<Class> Classes { get; set; } // = new Repository<Artist>();
             public Repository<Student> Students { get; set; } // = new Repository<User>();
+            public Repository<StudentInClass> StudentInClasses { get; set; } // = new Repository<User>();
 
 
 
@@ -96,10 +97,13 @@ namespace Sisma.Project1.Logic.Business
             {
                 using (var db = _dbContextFactory.CreateDbContext(new string[0] { }))
                 {
-                    var x = db.Classes.FirstOrDefault(item => item.RefId == classId);
-                    var x0 = x.StudentInClasses.Where(kp => kp.Class.RefId == classId).Select(item => item.Student);
+                    var res = db.Classes
+                                .Include(item => item.StudentInClasses)
+                                      .ThenInclude(item0 => item0.Student)
+                                .FirstOrDefault(item => item.RefId == classId);
+                    var res0 = res.StudentInClasses.Where(kp => kp.Class.RefId == classId).Select(item => item.Student);
 
-                    return x0.Where(item => item.IsActive).ToList();
+                    return res0.Where(item => item.IsActive).ToList();
                 }
             }
             catch (Exception e)
@@ -116,10 +120,13 @@ namespace Sisma.Project1.Logic.Business
             {
                 using (var db = _dbContextFactory.CreateDbContext(new String[0]))
                 {
-                    var x = db.Students.FirstOrDefault(item => item.RefId == studentId);
-                    var x0 = x.StudentInClasses.Select(item => item.Class).ToList();
+                    var res = db.Students
+                        .Include(item => item.StudentInClasses)
+                              .ThenInclude(item0 => item0.Class)
+                        .FirstOrDefault(item => item.RefId == studentId);
+                    var res0 = res.StudentInClasses.Select(item => item.Class).ToList();
 
-                    return x0.Where(item => item.IsActive).ToList();
+                    return res0.Where(item => item.IsActive).ToList();
                 }
 
             }
@@ -137,10 +144,14 @@ namespace Sisma.Project1.Logic.Business
             {
                 using (var db = _dbContextFactory.CreateDbContext(new string[0] { }))
                 {
-                    var x = db.Students.FirstOrDefault(item => item.RefId == studentId);
-                    var x0 = db.Classes.FirstOrDefault(item => item.RefId == classId);
+                    var res = db.Students
+                        .Include(item => item.StudentInClasses)
+                        .FirstOrDefault(item => item.RefId == studentId);
+                    var res0 = db.Classes
+                        .Include(item => item.StudentInClasses)
+                        .FirstOrDefault(item => item.RefId == classId);
 
-                    x.StudentInClasses.Add(new StudentInClass() { ClassId = x0.Id });
+                    res.StudentInClasses.Add(new StudentInClass() { ClassId = res0.Id });
 
                     db.SaveChanges();
                 }
@@ -161,6 +172,7 @@ namespace Sisma.Project1.Logic.Business
                 {
                     var dbSchool = db.Schools
                                     .Include(item => item.Classes)
+                                    .Include(item => item.Students)
                                     .FirstOrDefault(item => item.RefId == schoolId);
                     bool hasDependants = !(dbSchool.Classes.Count == 0 && dbSchool.Students.Count == 0);
 
@@ -200,9 +212,11 @@ namespace Sisma.Project1.Logic.Business
             {
                 using (var db = _dbContextFactory.CreateDbContext(new string[0] { }))
                 {
-                    var x = db.Classes.Where(item => item.StudentInClasses.Count == 0);
+                    var res = db.Classes
+                        .Include(item => item.StudentInClasses)
+                        .Where(item => item.StudentInClasses.Count == 0);
 
-                    db.Classes.RemoveRange(x);
+                    db.Classes.RemoveRange(res);
                     db.SaveChanges();
                 }
             }
@@ -238,7 +252,7 @@ namespace Sisma.Project1.Logic.Business
 
                 try
                 {
-                    var x = db.Students.Count(); //do some action
+                    var res = db.Students.Count(); //do some action
                     return true;
                 }
                 catch (Exception ex)
@@ -321,8 +335,8 @@ namespace Sisma.Project1.Logic.Business
 
         public bool Exists(Guid id)
         {
-            var x = GetInternal(id);
-            return x != null;
+            var res = GetInternal(id);
+            return res != null;
         }
 
         public int SaveChanges()

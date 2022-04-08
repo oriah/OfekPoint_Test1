@@ -32,16 +32,16 @@ namespace Sisma.Project1.Web.Controllers
         [HttpGet("getAll")]
         public IActionResult GetAll()
         {
-            var x0 = _blAdmin.Students.GetAll();
+            var res = _blAdmin.Students.GetAll();
 
-            return Ok(x0.Select(item => item.Map<StudentDTO>(_mapper)));
+            return Ok(res.Select(item => item.Map<StudentDTO>(_mapper)));
         }
         [HttpGet("get")]
         public IActionResult Get(Guid studentId)
         {
-            var x0 = _blAdmin.Students.Get(studentId);
+            var res = _blAdmin.Students.Get(studentId);
 
-            return Ok(x0.Map<StudentDTO>(_mapper));
+            return Ok(res.Map<StudentDTO>(_mapper));
         }
         [HttpPost]
         public IActionResult Create(StudentDTO item)

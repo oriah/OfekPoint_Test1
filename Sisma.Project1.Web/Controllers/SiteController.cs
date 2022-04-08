@@ -35,8 +35,8 @@ namespace Sisma.Project1.Web.Controllers
         [Route("getAllSchools")]
         public IActionResult GetAllSchools()
         {
-            var x = _blAdmin.Schools.GetAll();
-            return Ok(x.Map<SchoolDTO>(_mapper));
+            var res = _blAdmin.Schools.GetAll();
+            return Ok(res.Select(item => item.Map<SchoolDTO>(_mapper)));
         }
 
         [HttpDelete]
@@ -52,16 +52,16 @@ namespace Sisma.Project1.Web.Controllers
         [Route("getClassStudentsByClassId")]
         public IActionResult GetClassStudentsByClassId(Guid classId) // – list of all active students of a class
         {
-            List<Student> x = _bl.GetClassStudentsByClassId(classId);
-            return Ok(x.Map<StudentDTO>(_mapper));
+            List<Student> res = _bl.GetClassStudentsByClassId(classId);
+            return Ok(res.Select(item => item.Map<StudentDTO>(_mapper)));
         }
 
         [HttpGet]
         [Route("getAllStudentClasses")]
         public IActionResult GetAllStudentClasses(Guid studentId) // – all active classes that the user has.
         {
-            List<Class> x = _bl.GetAllStudentClasses(studentId);
-            return Ok(x.Map<ClassDTO>(_mapper));
+            List<Class> res = _bl.GetAllStudentClasses(studentId);
+            return Ok(res.Select(item=>item.Map<ClassDTO>(_mapper)));
         }
 
         [HttpPost]

@@ -122,6 +122,15 @@ namespace Sisma.Project1.Logic.Migrations
                     b.Property<int>("ClassId")
                         .HasColumnType("int");
 
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<Guid>("RefId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("StudentId", "ClassId");
 
                     b.HasIndex("ClassId");

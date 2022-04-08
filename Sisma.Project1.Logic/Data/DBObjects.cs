@@ -63,8 +63,12 @@ namespace Sisma.Project1.Logic.Data
 
     }
 
-    public class StudentInClass
+    public class StudentInClass : IDBEntity
     {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int Id { get; set; }
+        public Guid RefId { get; set; }
         public int StudentId { get; set; }
         public int ClassId { get; set; }
 

@@ -9,20 +9,15 @@ namespace Sisma.Project1.Web.Helpers
         public MyAutoMapperProfiles()
         {
             // account/register:
-            CreateMap<SchoolDTO, School>();    //(user)registerModel: view->db
-            CreateMap<School, SchoolDTO>();    //(user)registerModel: view->db
-            CreateMap<ClassDTO, Class>();    //(user)registerModel: view->db
-            CreateMap<Class, ClassDTO>();    //(user)registerModel: view->db
-            CreateMap<StudentDTO, Student>();    //(user)registerModel: view->db
-            CreateMap<Student, StudentDTO>();    //(user)registerModel: view->db
+            CreateMap<SchoolDTO, School>();    //school: view->db
+            CreateMap<School, SchoolDTO>();    //school: db->view
+            CreateMap<ClassDTO, Class>();    //class: view->db
+            CreateMap<Class, ClassDTO>();    //class: db-> view
+            CreateMap<StudentDTO, Student>();    //student: view->db
+            CreateMap<Student, StudentDTO>();    //student: db->view
+            CreateMap<StudentInClassDTO, StudentInClass>();    //studentInClass: view->db
+            CreateMap<StudentInClass, StudentInClassDTO>();    //studentInClass: db-> view
 
-
-            //samples::
-            //CreateMap<UserEntity, User>()
-            //  .ForMember(dest => dest.Gender, source => source.MapFrom(src => src.Gender.ToString()))
-            //  .ForMember(dest => dest.FirstName, source => source.MapFrom(src => src.FirstName.ToUpper()))
-            //  .ForMember(dest => dest.LastName, source => source.MapFrom(src => src.LastName.ToUpper()))
-            //  .ForMember(dest => dest.SIN, source => source.MapFrom(src => src.Id));
         }
     }
 

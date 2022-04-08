@@ -70,8 +70,6 @@ namespace Sisma.Project1.Logic.Data
     {
         public void Configure(EntityTypeBuilder<Student> builder)
         {
-            //builder.Property(p => p.Name).HasMaxLength(300).HasDefaultValue("");
-
             builder.HasMany(m => m.StudentInClasses).WithOne(item => item.Student).OnDelete(DeleteBehavior.NoAction);
         }
     }
@@ -80,12 +78,8 @@ namespace Sisma.Project1.Logic.Data
     {
         public void Configure(EntityTypeBuilder<StudentInClass> builder)
         {
-            //builder.Property(p => p.Name).HasMaxLength(300).HasDefaultValue("");
-
-            builder.HasKey(vf => new { vf.StudentId, vf.ClassId });
             builder.HasOne(m => m.Class).WithMany(item => item.StudentInClasses).OnDelete(DeleteBehavior.NoAction);
             builder.HasOne(m => m.Student).WithMany(item => item.StudentInClasses).OnDelete(DeleteBehavior.NoAction);
-
         }
     }
 }

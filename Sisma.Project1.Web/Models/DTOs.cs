@@ -34,5 +34,12 @@
 
 
     }
+   public class StudentInClassDTO
+    {
+        public int Id { get; set; }
+        public Guid RefId { get; set; }
+        public int StudentId { get; set; }
+        public int ClassId { get; set; }
+    }
 
 }

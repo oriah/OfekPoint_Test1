@@ -30,5 +30,5 @@ DB:  MSSQL DB  (Code-First Design]
 in swagger: **Site** section.
 
 /api/admin  -  admin site actions  
-in swagger: **AdminSchools,AdminClasseses,AdminStudents** sections.
+in swagger: **AdminSchools, AdminClasseses, AdminStudents, AdminStudentInClasses** sections.
   

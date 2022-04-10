@@ -1,5 +1,6 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.WebEncoders.Testing;
 using Sisma.Project1.BL.Business;
 using Sisma.Project1.DAL.Data;
 using Sisma.Project1.Shared.Exceptions;
@@ -33,30 +34,76 @@ namespace Sisma.Project1.Web.Controllers
         [HttpGet("getAll")]
         public IActionResult GetAll()
         {
-            var res = _blAdmin.Classes.GetAll();
+            try
+            {
+                var res = _blAdmin.Classes.GetAll();
 
-            return Ok(res.Select(item => item.Map<ClassDTO>(_mapper)));
+                return Ok(res.Select(item => item.Map<ClassDTO>(_mapper)));
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                throw;
+            }
         }
         [HttpGet("get")]
         public IActionResult Get(Guid classId)
         {
-            var res = _blAdmin.Classes.Get(classId);
+            try
+            {
+                var res = _blAdmin.Classes.Get(classId);
 
-            return Ok(res.Map<ClassDTO>(_mapper));
+                return Ok(res.Map<ClassDTO>(_mapper));
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                throw;
+            }
         }
         [HttpPost]
         public IActionResult Create(ClassDTO item)
         {
-            _blAdmin.Classes.Create(item.Map<Class>(_mapper));
+            try
+            {
+                Class obj;
+                _blAdmin.Classes.Create((obj = item.Map<Class>(_mapper)));
 
-            return Ok();
+                return CreatedAtAction(null, obj.Map<ClassDTO>(this._mapper));
+            }
+            catch (SismaException sexc)
+            {
+                Console.WriteLine(sexc);
+                return BadRequest(sexc.Message);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                throw;
+            }
         }
         [HttpPut]
         public IActionResult Update(ClassDTO item)
         {
-            _blAdmin.Classes.Update(item.Map<Class>(_mapper));
+            try
+            {
+                Class obj;
+                _blAdmin.Classes.Update((obj = item.Map<Class>(_mapper)));
 
-            return Ok();
+                return Ok(obj.Map<ClassDTO>(this._mapper));
+            }
+            catch (SismaException sexc)
+            {
+                Console.WriteLine(sexc);
+                return BadRequest(sexc.Message);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                throw;
+            }
         }
         [HttpDelete]
         public IActionResult Delete(Guid classId)

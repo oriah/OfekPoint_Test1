@@ -44,6 +44,11 @@ namespace Sisma.Project1.Web.Controllers
                 var res = _blAdmin.Schools.GetAll();
                 return Ok(res.Select(item => item.Map<SchoolDTO>(_mapper)));
             }
+            catch (SismaException sexc)
+            {
+                Console.WriteLine(sexc);
+                return BadRequest(sexc.Message);
+            }
             catch (Exception e)
             {
                 Console.WriteLine(e);   //Todo LOG for the current layer (=PL)
@@ -72,6 +77,11 @@ namespace Sisma.Project1.Web.Controllers
             {
                 return BadRequest("The school has associated classes and/or students while 'forceDelete' was specified as 'false'");
             }
+            catch (SismaException sexc)
+            {
+                Console.WriteLine(sexc);
+                return BadRequest(sexc.Message);
+            }
             catch (Exception ex)
             {
                 Console.WriteLine(ex);   //Todo LOG for the current layer (=PL)
@@ -92,6 +102,11 @@ namespace Sisma.Project1.Web.Controllers
             {
                 List<Student> res = _bl.GetClassStudentsByClassId(classId);
                 return Ok(res.Select(item => item.Map<StudentDTO>(_mapper)));
+            }
+            catch (SismaException sexc)
+            {
+                Console.WriteLine(sexc);
+                return BadRequest(sexc.Message);
             }
             catch (Exception e)
             {
@@ -127,9 +142,23 @@ namespace Sisma.Project1.Web.Controllers
         {
             try
             {
-                _blAdmin.Students.Create(item.Map<Student>(_mapper));
+                Student obj;
+                _blAdmin.Students.Create((obj = item.Map<Student>(_mapper)));
 
-                return Ok();
+                return CreatedAtAction(null, obj.Map<StudentDTO>(this._mapper));
+            }
+            //catch (SismaException sexc) when (sexc.Type == SismaExceptionTypes.ObjectNotFound)
+            //{
+            //    return BadRequest(sexc.Message);
+            //}
+            catch (SismaException sexc) when (sexc.Type == SismaExceptionTypes.StudentSchoolMismatch)
+            {
+                return BadRequest("The specified student's school is not the same as the school of the given class");
+            }
+            catch (SismaException sexc)
+            {
+                Console.WriteLine(sexc);
+                return BadRequest(sexc.Message);
             }
             catch (Exception e)
             {
@@ -156,7 +185,12 @@ namespace Sisma.Project1.Web.Controllers
             }
             catch (SismaException sexc) when (sexc.Type == SismaExceptionTypes.StudentSchoolMismatch)
             {
-                return BadRequest("The school has associated classes and/or students while 'forceDelete' was specified as 'false'");
+                return BadRequest("The specified student's school is not the same as the school of the given class");
+            }
+            catch (SismaException sexc)
+            {
+                Console.WriteLine(sexc);
+                return BadRequest(sexc.Message);
             }
             catch (Exception e)
             {
@@ -177,7 +211,12 @@ namespace Sisma.Project1.Web.Controllers
 
                 return Ok();
             }
-              catch (Exception e)
+            catch (SismaException sexc)
+            {
+                Console.WriteLine(sexc);
+                return BadRequest(sexc.Message);
+            }
+            catch (Exception e)
             {
                 Console.WriteLine(e);   //Todo LOG for the current layer (=PL)
                 throw;

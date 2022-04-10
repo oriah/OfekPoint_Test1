@@ -20,6 +20,11 @@ namespace Sisma.Project1.Shared.Exceptions
         ObjectDependencyExists = 2,
         StudentSchoolMismatch = 3,
         /// <summary>
+        /// General: An object of the given id already exists.
+        /// </summary>
+        [Description("An object of the given id already exists")]
+        ObjectAlreadyExists = 998,
+        /// <summary>
         /// General: The requested object or entity cannot be found.
         /// </summary>
         [Description("The requested object or entity cannot be found")]

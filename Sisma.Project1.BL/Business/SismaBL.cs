@@ -21,8 +21,8 @@ namespace Sisma.Project1.BL.Business
 
             public SchoolRepository Schools { get; set; } // = new Repository<Location>();
             public ClassRepository Classes { get; set; } // = new Repository<Artist>();
-            public Repository<Student> Students { get; set; } // = new Repository<User>();
-            public Repository<StudentInClass> StudentInClasses { get; set; } // = new Repository<User>();
+            public StudentRepository Students { get; set; } // = new Repository<User>();
+            public StudentInClassRepository StudentInClasses { get; set; } // = new Repository<User>();
 
 
 
@@ -30,8 +30,8 @@ namespace Sisma.Project1.BL.Business
             {
                 this.Schools = new SchoolRepository();
                 this.Classes = new ClassRepository();
-                this.Students = new Repository<Student>();
-                this.StudentInClasses = new Repository<StudentInClass>();
+                this.Students = new StudentRepository();
+                this.StudentInClasses = new StudentInClassRepository();
             }
 
 
@@ -145,19 +145,19 @@ namespace Sisma.Project1.BL.Business
             {
                 using (var db = _dbContextFactory.CreateDbContext(new string[0] { }))
                 {
-                    var lClass = db.Classes
+                    var dbClass = db.Classes
                         .Include(item => item.StudentInClasses)
                         .FirstOrDefault(item => item.RefId == classId);
-                    var student = db.Students
+                    var dbStudent = db.Students
                         .Include(item => item.StudentInClasses)
                         .FirstOrDefault(item => item.RefId == studentId);
 
-                    if (lClass.SchoolId != student.SchoolId)
+                    if (dbClass.SchoolId != dbStudent.SchoolId)
                     {
                         throw new SismaException(SismaExceptionTypes.StudentSchoolMismatch);
                     }
 
-                    student.StudentInClasses.Add(new StudentInClass() { ClassId = lClass.Id });
+                    dbStudent.StudentInClasses.Add(new StudentInClass() { ClassId = dbClass.Id });
 
                     db.SaveChanges();
                 }
@@ -296,6 +296,25 @@ namespace Sisma.Project1.BL.Business
                 .FirstOrDefault(item => item.RefId == id);
         }
 
+        public override void Create(School entity, bool saveChanges = true)
+        {
+            //fix input::
+            entity.RefId = Guid.NewGuid();
+
+            //var dbSchool = GetInternal(entity.RefId);
+            //if (dbSchool != null)
+            //{
+            //    throw new SismaException(SismaExceptionTypes.ObjectAlreadyExists);
+            //}
+
+            base.Create(entity, saveChanges);
+        }
+
+        public override void Update(School entity, bool saveChanges = true)
+        {
+            base.Update(entity, saveChanges);
+        }
+
         public override void Delete(Guid id, bool saveChanges = true)
         {
             var dbClass = GetInternal(id);
@@ -314,6 +333,37 @@ namespace Sisma.Project1.BL.Business
             return _db.Classes
                 .Include(item => item.StudentInClasses)
                 .FirstOrDefault(item => item.RefId == id);
+        }
+
+        public override void Create(Class entity, bool saveChanges = true)
+        {
+            //fix input::
+            entity.RefId = Guid.NewGuid();
+
+            //var dbClass = GetInternal(entity.RefId);
+            //if (dbClass != null)
+            //{
+            //    throw new SismaException(SismaExceptionTypes.ObjectAlreadyExists);
+            //}
+
+            var dbSchool = _db.Schools.Find(entity.SchoolId);
+            if (dbSchool == null)
+            {
+                throw new SismaException(SismaExceptionTypes.ObjectNotFound, "A school of the given id does not exist");
+            }
+
+            base.Create(entity, saveChanges);
+        }
+
+        public override void Update(Class entity, bool saveChanges = true)
+        {
+            var dbSchool = _db.Schools.Find(entity.SchoolId);
+            if (dbSchool == null)
+            {
+                throw new SismaException(SismaExceptionTypes.ObjectNotFound, "A school of the given id does not exist");
+            }
+
+            base.Update(entity, saveChanges);
         }
 
         public override void Delete(Guid id, bool saveChanges = true)
@@ -336,6 +386,37 @@ namespace Sisma.Project1.BL.Business
                 .FirstOrDefault(item => item.RefId == id);
         }
 
+        public override void Create(Student entity, bool saveChanges = true)
+        {
+            //fix input::
+            entity.RefId = Guid.NewGuid();
+
+            //var dbStudent = GetInternal(entity.RefId);
+            //if (dbStudent != null)
+            //{
+            //    throw new SismaException(SismaExceptionTypes.ObjectAlreadyExists);
+            //}
+
+            var dbSchool = _db.Schools.Find(entity.SchoolId);
+            if (dbSchool == null)
+            {
+                throw new SismaException(SismaExceptionTypes.ObjectNotFound, "A school of the given id does not exist");
+            }
+
+            base.Create(entity, saveChanges);
+        }
+
+        public override void Update(Student entity, bool saveChanges = true)
+        {
+            var dbSchool = _db.Schools.Find(entity.SchoolId);
+            if (dbSchool == null)
+            {
+                throw new SismaException(SismaExceptionTypes.ObjectNotFound, "A school of the given id does not exist");
+            }
+
+            base.Update(entity, saveChanges);
+        }
+
         public override void Delete(Guid id, bool saveChanges = true)
         {
             var dbClass = GetInternal(id);
@@ -347,13 +428,58 @@ namespace Sisma.Project1.BL.Business
         }
     }
 
-    //public class StudentInClassRepository : Repository<School>
-    //{
-    //    public override void Delete(Guid id, bool saveChanges = true)
-    //    {
-    //        base.Delete(id, saveChanges);
-    //    }
-    //}
+    public class StudentInClassRepository : Repository<StudentInClass>
+    {
+        public override void Create(StudentInClass entity, bool saveChanges = true)
+        {
+            //fix input::
+            entity.RefId = Guid.NewGuid();
+
+            //var dbStudentInClass = GetInternal(entity.RefId);
+            //if (dbStudentInClass != null)
+            //{
+            //    throw new SismaException(SismaExceptionTypes.ObjectAlreadyExists);
+            //}
+
+            var dbStudent = _db.Students.Find(entity.StudentId);
+            var dbClass = _db.Classes.Find(entity.ClassId);
+
+            if (dbStudent == null)
+            {
+                throw new SismaException(SismaExceptionTypes.ObjectNotFound, "The specified student does not exist in the system");
+            }
+
+            if (dbClass == null)
+            {
+                throw new SismaException(SismaExceptionTypes.ObjectNotFound, "The specified class does not exist in the system");
+            }
+
+            if (dbClass.SchoolId != dbStudent.SchoolId)
+            {
+                throw new SismaException(SismaExceptionTypes.StudentSchoolMismatch);
+            }
+
+            base.Create(entity, saveChanges);
+        }
+
+        public override void Update(StudentInClass entity, bool saveChanges = true)
+        {
+            var dbStudent = _db.Students.Find(entity.StudentId);
+            var dbClass = _db.Classes.Find(entity.ClassId);
+
+            if (dbClass.SchoolId != dbStudent.SchoolId)
+            {
+                throw new SismaException(SismaExceptionTypes.StudentSchoolMismatch);
+            }
+
+            base.Update(entity, saveChanges);
+        }
+
+        public override void Delete(Guid id, bool saveChanges = true)
+        {
+            base.Delete(id, saveChanges);
+        }
+    }
 
     public class Repository<T> : IRepository<T>
         where T : class, IDBEntity

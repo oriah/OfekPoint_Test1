@@ -33,30 +33,76 @@ namespace Sisma.Project1.Web.Controllers
         [HttpGet("getAll")]
         public IActionResult GetAll()
         {
-            var res = _blAdmin.Students.GetAll();
+            try
+            {
+                var res = _blAdmin.Students.GetAll();
 
-            return Ok(res.Select(item => item.Map<StudentDTO>(_mapper)));
+                return Ok(res.Select(item => item.Map<StudentDTO>(_mapper)));
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                throw;
+            }
         }
         [HttpGet("get")]
         public IActionResult Get(Guid studentId)
         {
-            var res = _blAdmin.Students.Get(studentId);
+            try
+            {
+                var res = _blAdmin.Students.Get(studentId);
 
-            return Ok(res.Map<StudentDTO>(_mapper));
+                return Ok(res.Map<StudentDTO>(_mapper));
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                throw;
+            }
         }
         [HttpPost]
         public IActionResult Create(StudentDTO item)
         {
-            _blAdmin.Students.Create(item.Map<Student>(_mapper));
+            try
+            {
+                Student obj;
+                _blAdmin.Students.Create((obj = item.Map<Student>(_mapper)));
 
-            return Ok();
+                return CreatedAtAction(null, obj.Map<StudentDTO>(this._mapper));
+            }
+            catch (SismaException sexc)
+            {
+                Console.WriteLine(sexc);
+                return BadRequest(sexc.Message);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                throw;
+            }
         }
         [HttpPut]
         public IActionResult Update(StudentDTO item)
         {
-            _blAdmin.Students.Update(item.Map<Student>(_mapper));
+            try
+            {
+                Student obj;
+                _blAdmin.Students.Update((obj = item.Map<Student>(_mapper)));
 
-            return Ok();
+                return Ok(obj.Map<StudentDTO>(this._mapper));
+            }
+            catch (SismaException sexc)
+            {
+                Console.WriteLine(sexc);
+                return BadRequest(sexc.Message);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                throw;
+            }
         }
         [HttpDelete]
         public IActionResult Delete(Guid studentId)
@@ -70,7 +116,7 @@ namespace Sisma.Project1.Web.Controllers
             }
             catch (SismaException sexc) when (sexc.Type == SismaExceptionTypes.ObjectDependencyExists)
             {
-                return BadRequest("The student has associated class-related records");
+                return BadRequest("The student has associated classes");
             }
             catch (Exception ex)
             {

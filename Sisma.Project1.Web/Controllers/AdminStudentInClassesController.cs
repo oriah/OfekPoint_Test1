@@ -2,6 +2,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Sisma.Project1.BL.Business;
 using Sisma.Project1.DAL.Data;
+using Sisma.Project1.Shared.Exceptions;
 using Sisma.Project1.Web.Helpers;
 using Sisma.Project1.Web.Models;
 
@@ -32,37 +33,113 @@ namespace Sisma.Project1.Web.Controllers
         [HttpGet("getAll")]
         public IActionResult GetAll()
         {
-            var res = _blAdmin.StudentInClasses.GetAll();
+            try
+            {
+                var res = _blAdmin.StudentInClasses.GetAll();
 
-            return Ok(res.Select(item => item.Map<StudentInClassDTO>(_mapper)));
+                return Ok(res.Select(item => item.Map<StudentInClassDTO>(_mapper)));
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                throw;
+            }
         }
         [HttpGet("get")]
         public IActionResult Get(Guid studentId)
         {
-            var res = _blAdmin.StudentInClasses.Get(studentId);
+            try
+            {
+                var res = _blAdmin.StudentInClasses.Get(studentId);
 
-            return Ok(res.Map<StudentInClassDTO>(_mapper));
+                return Ok(res.Map<StudentInClassDTO>(_mapper));
+
+            }
+            catch (SismaException sexc)
+            {
+                Console.WriteLine(sexc);
+                return BadRequest(sexc.Message);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                throw;
+            }
         }
         [HttpPost]
         public IActionResult Create(StudentInClassDTO item)
         {
-            _blAdmin.StudentInClasses.Create(item.Map<StudentInClass>(_mapper));
+            try
+            {
+                StudentInClass obj;
+                _blAdmin.StudentInClasses.Create((obj = item.Map<StudentInClass>(_mapper)));
 
-            return Ok();
+                return CreatedAtAction(null, obj.Map<StudentInClassDTO>(this._mapper));
+            }
+            catch (SismaException sexc) when (sexc.Type == SismaExceptionTypes.ObjectNotFound)
+            {
+                return BadRequest(sexc.Message);
+            }
+            catch (SismaException sexc) when (sexc.Type == SismaExceptionTypes.StudentSchoolMismatch)
+            {
+                return BadRequest("The specified student's school is not the same as the school of the given class");
+            }
+            catch (SismaException sexc)
+            {
+                Console.WriteLine(sexc);
+                return BadRequest(sexc.Message);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                throw;
+            }
         }
         [HttpPut]
         public IActionResult Update(StudentDTO item)
         {
-            _blAdmin.StudentInClasses.Update(item.Map<StudentInClass>(_mapper));
+            try
+            {
+                StudentInClass obj;
+                _blAdmin.StudentInClasses.Update((obj = item.Map<StudentInClass>(_mapper)));
 
-            return Ok();
+                return Ok(obj.Map<StudentInClassDTO>(this._mapper));
+            }
+            catch (SismaException sexc) when (sexc.Type == SismaExceptionTypes.ObjectNotFound)
+            {
+                return BadRequest(sexc.Message);
+            }
+            catch (SismaException sexc) when (sexc.Type == SismaExceptionTypes.StudentSchoolMismatch)
+            {
+                return BadRequest("The specified student's school is not the same as the school of the given class");
+            }
+            catch (SismaException sexc)
+            {
+                Console.WriteLine(sexc);
+                return BadRequest(sexc.Message);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                throw;
+            }
         }
         [HttpDelete]
         public IActionResult Delete(Guid studentId)
         {
-            _blAdmin.StudentInClasses.Delete(studentId);
+            try
+            {
+                _blAdmin.StudentInClasses.Delete(studentId);
 
-            return Ok();
+                return Ok();
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                throw;
+            }
         }
 
 

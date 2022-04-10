@@ -73,7 +73,6 @@ namespace Sisma.Project1.Web.Controllers
                     return BadRequest("'schoolId' parameter cannot be null");
                 }
 
-                bool deleteAvoided;
                 _bl.DeleteSchool(schoolId, forceDelete);
 
                 return Ok();
@@ -188,7 +187,7 @@ namespace Sisma.Project1.Web.Controllers
         /// <param name="studentId">student id (=referential unique ID)</param>
         /// <param name="classId">class id (=referential unique ID)</param>
         /// <returns></returns>
-        [HttpPut]
+        [HttpPost]
         [Route("addStudentToClass")]
         public IActionResult AddStudentToClass(Guid studentId, Guid classId)
         {

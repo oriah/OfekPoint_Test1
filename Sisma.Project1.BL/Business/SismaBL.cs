@@ -143,7 +143,9 @@ namespace Sisma.Project1.BL.Business
                 {
                     var dbSchool = db.Schools
                                     .Include(item => item.Classes)
+                                          .ThenInclude(item0 => item0.StudentInClasses)
                                     .Include(item => item.Students)
+                                          .ThenInclude(item0 => item0.StudentInClasses)
                                     .FirstOrDefault(item => item.RefId == schoolId);
                     bool hasDependants = !(dbSchool.Classes.Count == 0 && dbSchool.Students.Count == 0);
 
@@ -153,12 +155,14 @@ namespace Sisma.Project1.BL.Business
                     }
                     else
                     {
-                        if (forceDelete)
+                        if (!forceDelete)
                         {
                             throw new SismaException(SismaExceptionTypes.ObjectDependencyExists, "School has dependencies");
                         }
                         else
                         {
+                            db.StudentInClasses.RemoveRange(dbSchool.Students.SelectMany(item => item.StudentInClasses));
+                            db.StudentInClasses.RemoveRange(dbSchool.Classes.SelectMany(item => item.StudentInClasses));
                             db.Students.RemoveRange(dbSchool.Students); //students
                             db.Classes.RemoveRange(dbSchool.Classes); //classes
                             db.Schools.Remove(dbSchool);
@@ -265,6 +269,8 @@ namespace Sisma.Project1.BL.Business
         {
             //fix input::
             entity.RefId = Guid.NewGuid();
+            entity.RecordCreateDate = DateTime.Now;
+            entity.IsActive = true;
 
             //var dbSchool = GetInternal(entity.RefId);
             //if (dbSchool != null)
@@ -304,6 +310,8 @@ namespace Sisma.Project1.BL.Business
         {
             //fix input::
             entity.RefId = Guid.NewGuid();
+            entity.RecordCreateDate = DateTime.Now;
+            entity.IsActive = true;
 
             //var dbClass = GetInternal(entity.RefId);
             //if (dbClass != null)
@@ -355,6 +363,8 @@ namespace Sisma.Project1.BL.Business
         {
             //fix input::
             entity.RefId = Guid.NewGuid();
+            entity.RecordCreateDate = DateTime.Now;
+            entity.IsActive = true;
 
             //var dbStudent = GetInternal(entity.RefId);
             //if (dbStudent != null)

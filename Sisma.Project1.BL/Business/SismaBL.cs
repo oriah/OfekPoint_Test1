@@ -37,10 +37,8 @@ namespace Sisma.Project1.BL.Business
 
 
 
-            //public class LocationsRepository : Repository<Location>
-            //{
 
-            //}
+
 
 
             public void Dispose()
@@ -51,40 +49,7 @@ namespace Sisma.Project1.BL.Business
             }
 
 
-            #region Excluded code.
 
-            //public class Locations
-            //{
-            //    public void Get()
-            //    {
-            //        using (var db = new KaspitDB3())
-            //        {
-            //            db
-            //        }
-            //    }
-            //    public void GetAll()
-            //    {
-
-            //    }
-            //    public void Create(Location location)
-            //    {
-
-            //    }
-            //    public void Get()
-            //    {
-
-            //    }
-            //    public void Delete(Guid id)
-            //    {
-
-            //    }
-            //    public void Get()
-            //    {
-
-            //    }
-            //} 
-
-            #endregion
         }
 
 
@@ -452,6 +417,13 @@ namespace Sisma.Project1.BL.Business
             if (dbClass == null)
             {
                 throw new SismaException(SismaExceptionTypes.ObjectNotFound, "The specified class does not exist in the system");
+            }
+
+            bool isExists = _db.StudentInClasses.Any(item => item.ClassId == entity.ClassId
+                                                             && item.StudentId == entity.StudentId);
+            if (isExists)
+            {
+                throw new SismaException(SismaExceptionTypes.ObjectAlreadyExists, $@"The specified student is already a part of the given class (studentId='{entity.StudentId}', classId='{entity.ClassId}'");
             }
 
             if (dbClass.SchoolId != dbStudent.SchoolId)

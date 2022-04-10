@@ -68,6 +68,11 @@ namespace Sisma.Project1.Web.Controllers
         {
             try
             {
+                if (schoolId == default)
+                {
+                    return BadRequest("'schoolId' parameter cannot be null");
+                }
+
                 bool deleteAvoided;
                 _bl.DeleteSchool(schoolId, forceDelete);
 
@@ -100,6 +105,11 @@ namespace Sisma.Project1.Web.Controllers
         {
             try
             {
+                if (classId == default)
+                {
+                    return BadRequest("'classId' parameter cannot be null");
+                }
+
                 List<Student> res = _bl.GetClassStudentsByClassId(classId);
                 return Ok(res.Select(item => item.Map<StudentDTO>(_mapper)));
             }
@@ -126,6 +136,11 @@ namespace Sisma.Project1.Web.Controllers
         {
             try
             {
+                if (studentId == default)
+                {
+                    return BadRequest("'studentId' parameter cannot be null");
+                }
+
                 List<Class> res = _bl.GetAllStudentClasses(studentId);
                 return Ok(res.Select(item => item.Map<ClassDTO>(_mapper)));
             }
@@ -179,6 +194,15 @@ namespace Sisma.Project1.Web.Controllers
         {
             try
             {
+                if (studentId == default)
+                {
+                    return BadRequest("'studentId' parameter cannot be null");
+                }
+                else if (classId == default)
+                {
+                    return BadRequest("'classId' parameter cannot be null");
+                }
+
                 _bl.AddStudentToClass(studentId, classId);
 
                 return Ok();

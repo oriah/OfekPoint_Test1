@@ -268,6 +268,7 @@ namespace Sisma.Project1.BL.Business
         public override void Create(School entity, bool saveChanges = true)
         {
             //fix input::
+            entity.Id = 0;
             entity.RefId = Guid.NewGuid();
             entity.RecordCreateDate = DateTime.Now;
             entity.IsActive = true;
@@ -309,6 +310,7 @@ namespace Sisma.Project1.BL.Business
         public override void Create(Class entity, bool saveChanges = true)
         {
             //fix input::
+            entity.Id = 0;
             entity.RefId = Guid.NewGuid();
             entity.RecordCreateDate = DateTime.Now;
             entity.IsActive = true;
@@ -362,6 +364,7 @@ namespace Sisma.Project1.BL.Business
         public override void Create(Student entity, bool saveChanges = true)
         {
             //fix input::
+            entity.Id = 0;
             entity.RefId = Guid.NewGuid();
             entity.RecordCreateDate = DateTime.Now;
             entity.IsActive = true;
@@ -408,6 +411,7 @@ namespace Sisma.Project1.BL.Business
         public override void Create(StudentInClass entity, bool saveChanges = true)
         {
             //fix input::
+            entity.Id = 0;
             entity.RefId = Guid.NewGuid();
 
             //var dbStudentInClass = GetInternal(entity.RefId);

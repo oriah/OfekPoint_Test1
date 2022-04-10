@@ -1,0 +1,14 @@
+D:\WorkDrive\TFS\Amiram\Sisma\Source\Sisma.Project1.DAL\bin\Debug\net6.0\Sisma.Project1.DAL.deps.json
+D:\WorkDrive\TFS\Amiram\Sisma\Source\Sisma.Project1.DAL\bin\Debug\net6.0\Sisma.Project1.DAL.runtimeconfig.json
+D:\WorkDrive\TFS\Amiram\Sisma\Source\Sisma.Project1.DAL\bin\Debug\net6.0\Sisma.Project1.DAL.dll
+D:\WorkDrive\TFS\Amiram\Sisma\Source\Sisma.Project1.DAL\bin\Debug\net6.0\Sisma.Project1.DAL.pdb
+D:\WorkDrive\TFS\Amiram\Sisma\Source\Sisma.Project1.DAL\obj\Debug\net6.0\Sisma.Project1.DAL.csproj.AssemblyReference.cache
+D:\WorkDrive\TFS\Amiram\Sisma\Source\Sisma.Project1.DAL\obj\Debug\net6.0\Sisma.Project1.DAL.GeneratedMSBuildEditorConfig.editorconfig
+D:\WorkDrive\TFS\Amiram\Sisma\Source\Sisma.Project1.DAL\obj\Debug\net6.0\Sisma.Project1.DAL.AssemblyInfoInputs.cache
+D:\WorkDrive\TFS\Amiram\Sisma\Source\Sisma.Project1.DAL\obj\Debug\net6.0\Sisma.Project1.DAL.AssemblyInfo.cs
+D:\WorkDrive\TFS\Amiram\Sisma\Source\Sisma.Project1.DAL\obj\Debug\net6.0\Sisma.Project1.DAL.csproj.CoreCompileInputs.cache
+D:\WorkDrive\TFS\Amiram\Sisma\Source\Sisma.Project1.DAL\obj\Debug\net6.0\Sisma.Project1.DAL.dll
+D:\WorkDrive\TFS\Amiram\Sisma\Source\Sisma.Project1.DAL\obj\Debug\net6.0\refint\Sisma.Project1.DAL.dll
+D:\WorkDrive\TFS\Amiram\Sisma\Source\Sisma.Project1.DAL\obj\Debug\net6.0\Sisma.Project1.DAL.pdb
+D:\WorkDrive\TFS\Amiram\Sisma\Source\Sisma.Project1.DAL\obj\Debug\net6.0\Sisma.Project1.DAL.genruntimeconfig.cache
+D:\WorkDrive\TFS\Amiram\Sisma\Source\Sisma.Project1.DAL\obj\Debug\net6.0\ref\Sisma.Project1.DAL.dll
